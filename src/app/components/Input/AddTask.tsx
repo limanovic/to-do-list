@@ -1,14 +1,20 @@
-'use client'
-import { TextField } from "@mui/material"
-import React from "react"
+'use client';
+import { TextField } from '@mui/material';
+import React from 'react';
 
 type Task = {
     id: number;
     name: string;
-}
+};
 
-
-const AddTask = ({ newTask, setNewTask, tasks, setTasks, saveEditedTask, editTask }: {
+const AddTask = ({
+    newTask,
+    setNewTask,
+    tasks,
+    setTasks,
+    saveEditedTask,
+    editTask,
+}: {
     newTask: string;
     setNewTask: React.Dispatch<React.SetStateAction<string>>;
     tasks: Task[];
@@ -16,7 +22,6 @@ const AddTask = ({ newTask, setNewTask, tasks, setTasks, saveEditedTask, editTas
     saveEditedTask: () => void;
     editTask: Task;
 }) => {
-
     const addTask = () => {
         if (newTask.trim() !== '') {
             const task: Task = {
@@ -24,12 +29,11 @@ const AddTask = ({ newTask, setNewTask, tasks, setTasks, saveEditedTask, editTas
                 name: newTask,
             };
             setTasks([...tasks, task]);
-            setNewTask('')
+            setNewTask('');
         }
-    }
+    };
     return (
         <div>
-
             <TextField
                 id="standard-basic"
                 label="Standard"
@@ -38,21 +42,15 @@ const AddTask = ({ newTask, setNewTask, tasks, setTasks, saveEditedTask, editTas
                 onChange={(e) => setNewTask(e.target.value)}
             />
             {editTask ? (
-                <button
-                    className="p-2 bg-green-500 text-white rounded"
-                    onClick={saveEditedTask}
-                >
+                <button className="p-2 bg-green-500 text-white rounded" onClick={saveEditedTask}>
                     Save
                 </button>
             ) : (
-                <button
-                    className="p-2 bg-blue-500 text-white rounded"
-                    onClick={addTask}
-                >
+                <button className="p-2 bg-blue-500 text-white rounded" onClick={addTask}>
                     Add Task
                 </button>
             )}
         </div>
-    )
-}
-export default AddTask
+    );
+};
+export default AddTask;
