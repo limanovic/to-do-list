@@ -8,7 +8,7 @@ type Task = {
 }
 
 
-const AddTask = ({ newTask, setNewTask, tasks, setTasks }) => {
+const AddTask = ({ newTask, setNewTask, tasks, setTasks, saveEditedTask, editTask }) => {
 
     const addTask = () => {
         if (newTask.trim() !== '') {
@@ -30,12 +30,21 @@ const AddTask = ({ newTask, setNewTask, tasks, setTasks }) => {
                 value={newTask}
                 onChange={(e) => setNewTask(e.target.value)}
             />
-            <button
-                className="p-2 bg-blue-500 text-white rounded"
-                onClick={addTask}
-            >
-                Add Task
-            </button>
+            {editTask ? (
+                <button
+                    className="p-2 bg-green-500 text-white rounded"
+                    onClick={saveEditedTask}
+                >
+                    Save
+                </button>
+            ) : (
+                <button
+                    className="p-2 bg-blue-500 text-white rounded"
+                    onClick={addTask}
+                >
+                    Add Task
+                </button>
+            )}
         </div>
     )
 }
