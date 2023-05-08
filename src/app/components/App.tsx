@@ -45,6 +45,7 @@ export default function App() {
                     setNewTask={setNewTask}
                     tasks={tasks}
                     setTasks={setTasks}
+                    //
                     editTask={editTask}
                     saveEditedTask={saveEditedTask}
                 />
