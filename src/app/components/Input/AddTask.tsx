@@ -8,7 +8,14 @@ type Task = {
 }
 
 
-const AddTask = ({ newTask, setNewTask, tasks, setTasks, saveEditedTask, editTask }) => {
+const AddTask = ({ newTask, setNewTask, tasks, setTasks, saveEditedTask, editTask }: {
+    newTask: string;
+    setNewTask: React.Dispatch<React.SetStateAction<string>>;
+    tasks: Task[];
+    setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+    saveEditedTask: () => void;
+    editTask: Task;
+}) => {
 
     const addTask = () => {
         if (newTask.trim() !== '') {

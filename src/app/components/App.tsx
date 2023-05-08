@@ -42,7 +42,7 @@ export default function App() {
             <div className="flex mb-4 justify-center">
                 <AddTask newTask={newTask} setNewTask={setNewTask} tasks={tasks} setTasks={setTasks} editTask={editTask} saveEditedTask={saveEditedTask} />
             </div>
-            <TaskList tasks={tasks} setTasks={setTasks} editTask={editTask} saveEditedTask={saveEditedTask} editTaskName={editTaskName} removeTask={removeTask} />
+            <TaskList tasks={tasks} editTask={editTask} saveEditedTask={saveEditedTask} editTaskName={editTaskName} removeTask={removeTask} />
         </div>
     )
 }

@@ -6,7 +6,13 @@ type Task = {
     name: string;
 }
 
-export default function OneTask({ task, removeTask, editTaskName, editTask, saveEditedTask }) {
+export default function OneTask({ task, removeTask, editTaskName, editTask, saveEditedTask }: {
+    task: Task;
+    removeTask: () => void;
+    editTaskName: () => void;
+    saveEditedTask: () => void;
+    editTask: Task;
+}) {
 
     return (
         <>
