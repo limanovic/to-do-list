@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from "react"
-import AddTask from "./AddTask";
+import AddTask from "./Input/AddTask";
 
 type Task = {
     id: number;
