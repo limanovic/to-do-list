@@ -6,7 +6,7 @@ type Task = {
     name: string;
 };
 
-export default function OneTask({
+export default function Task({
     task,
     removeTask,
     editTaskName,

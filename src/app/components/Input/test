@@ -1,0 +1,4 @@
+This is text input with button.
+Task entry is done using text input.
+The task is added to the list when the Add Task button is clicked.
+If a task is being edited, the Save button replaces the Add Task button.

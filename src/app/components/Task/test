@@ -1,0 +1,6 @@
+There are buttons and task text.
+There are buttons to remove and alter the task's text. 
+The task gets removed from the list if the Remove button is clicked. 
+When the Edit button is clicked, the task's text can be edited. 
+The Save button takes the place of the Edit button while editing a task. 
+The task's text is changed when the Save button is pressed.
