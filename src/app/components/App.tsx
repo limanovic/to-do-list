@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import AddTask from './Input/AddTask';
-import OneTask from './OneTask/OneTask';
+import OneTask from './Task/Task';
 import TaskList from './TaskList/TaskList';
 
 type Task = {

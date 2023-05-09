@@ -1,6 +1,7 @@
 'use client';
 
-import OneTask from '../OneTask/OneTask';
+import Task from '../Task/Task';
+import OneTask from '../Task/Task';
 
 type Task = {
     id: number;
@@ -23,7 +24,7 @@ export default function TaskList({
         <ul>
             {tasks.map((task: Task) => (
                 <li key={task.id} className="flex items-center mb-2 justify-center">
-                    <OneTask
+                    <Task
                         task={task}
                         removeTask={removeTask}
                         editTask={editTask}
