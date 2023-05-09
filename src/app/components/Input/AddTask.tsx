@@ -1,5 +1,5 @@
 'use client';
-import { TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import React from 'react';
 
 type Task = {
@@ -42,13 +42,13 @@ const AddTask = ({
                 onChange={(e) => setNewTask(e.target.value)}
             />
             {editTask ? (
-                <button className="p-2 bg-green-500 text-white rounded" onClick={saveEditedTask}>
+                <Button variant="contained" color="success" onClick={saveEditedTask}>
                     Save
-                </button>
+                </Button>
             ) : (
-                <button className="p-2 bg-blue-500 text-white rounded" onClick={addTask}>
+                <Button variant="contained" component="label" onClick={addTask}>
                     Add Task
-                </button>
+                </Button>
             )}
         </div>
     );

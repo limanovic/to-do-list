@@ -22,7 +22,7 @@ export default function TaskList({
     return (
         <ul>
             {tasks.map((task: Task) => (
-                <li key={task.id} className="flex items-center mb-2">
+                <li key={task.id} className="flex items-center mb-2 justify-center">
                     <OneTask
                         task={task}
                         removeTask={removeTask}

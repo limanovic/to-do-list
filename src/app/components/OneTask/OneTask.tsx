@@ -17,25 +17,22 @@ export default function OneTask({
     removeTask: (id: number) => void;
     editTaskName: (task: Task) => void;
     saveEditedTask: () => void;
-            editTask: Task | null;
+    editTask: Task | null;
 }) {
     return (
         <>
-            {task.name}
-            <Button variant="outlined" startIcon={<DeleteIcon />}>
+            <h4 className="pr-5">{task.name}</h4>
+            <Button className="mr-5" variant="outlined" color="error" onClick={() => removeTask(task.id)}>
                 Delete
             </Button>
-            <button className="p-1 bg-red-500 text-white rounded" onClick={() => removeTask(task.id)}>
-                Remove
-            </button>
             {editTask && editTask.id === task.id ? (
-                <button className="p-1 bg-green-500 text-white rounded" onClick={saveEditedTask}>
+                <Button className="mr-5" variant="contained" color="success" onClick={saveEditedTask}>
                     Save
-                </button>
+                </Button>
             ) : (
-                <button className="p-1 bg-yellow-500 text-white rounded mr-1" onClick={() => editTaskName(task)}>
+                <Button className="mr-5" variant="contained" onClick={() => editTaskName(task)}>
                     Edit
-                </button>
+                </Button>
             )}
         </>
     );
