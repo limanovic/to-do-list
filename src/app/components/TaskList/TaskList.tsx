@@ -1,7 +1,5 @@
 'use client';
-
 import Task from '../Task/Task';
-import OneTask from '../Task/Task';
 
 type Task = {
     id: number;
@@ -15,7 +13,7 @@ export default function TaskList({
     removeTask,
 }: {
     tasks: Task[];
-    saveEditedTask: () => void;
+    saveEditedTask: (e: { preventDefault: () => void }) => void;
     editTask: Task | null;
     editTaskName: (task: Task) => void;
     removeTask: (id: number) => void;
