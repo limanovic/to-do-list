@@ -16,12 +16,12 @@ export default function Task({
     task: Task;
     removeTask: (id: number) => void;
     editTaskName: (task: Task) => void;
-    saveEditedTask: () => void;
+    saveEditedTask: (e: { preventDefault: () => void }) => void;
     editTask: Task | null;
 }) {
     return (
-        <>
-            <h4 className="pr-5">{task.name}</h4>
+        <div className="flex gap-x-4">
+            <h4 className="pr-5 flex self-center">{task.name}</h4>
             <Button className="mr-5" variant="outlined" color="error" onClick={() => removeTask(task.id)}>
                 Delete
             </Button>
@@ -34,6 +34,6 @@ export default function Task({
                     Edit
                 </Button>
             )}
-        </>
+        </div>
     );
 }

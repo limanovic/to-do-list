@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import AddTask from './Input/AddTask';
 import OneTask from './Task/Task';
 import TaskList from './TaskList/TaskList';
@@ -14,8 +14,10 @@ export default function App() {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [newTask, setNewTask] = useState('');
     const [editTask, setEditTask] = useState<Task | null>(null);
+    const inputRef = useRef<HTMLInputElement | null>(null);
 
-    const saveEditedTask = () => {
+    const saveEditedTask = (e: { preventDefault: () => void }) => {
+        e.preventDefault();
         if (editTask) {
             const updatedTasks = tasks.map((task: Task) =>
                 task.id === editTask.id ? { ...task, name: newTask } : task,
@@ -29,6 +31,9 @@ export default function App() {
     const editTaskName = (task: Task) => {
         setEditTask(task);
         setNewTask(task.name);
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
     };
 
     const removeTask = (id: number) => {
@@ -45,9 +50,9 @@ export default function App() {
                     setNewTask={setNewTask}
                     tasks={tasks}
                     setTasks={setTasks}
-                    //
                     editTask={editTask}
                     saveEditedTask={saveEditedTask}
+                    inputRef={inputRef}
                 />
             </div>
             <TaskList

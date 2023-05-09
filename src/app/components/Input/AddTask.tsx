@@ -1,5 +1,5 @@
 'use client';
-import { Button, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 import React from 'react';
 
 type Task = {
@@ -14,15 +14,18 @@ const AddTask = ({
     setTasks,
     saveEditedTask,
     editTask,
+    inputRef,
 }: {
     newTask: string;
     setNewTask: React.Dispatch<React.SetStateAction<string>>;
     tasks: Task[];
     setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
-    saveEditedTask: () => void;
+    saveEditedTask: (e: { preventDefault: () => void }) => void;
     editTask: Task | null;
+    inputRef: any;
 }) => {
-    const addTask = () => {
+    const addTask = (e: { preventDefault: () => void }) => {
+        e.preventDefault();
         if (newTask.trim() !== '') {
             const task: Task = {
                 id: new Date().getTime(),
@@ -34,22 +37,25 @@ const AddTask = ({
     };
     return (
         <div>
-            <TextField
-                id="standard-basic"
-                label="Standard"
-                variant="standard"
-                value={newTask}
-                onChange={(e) => setNewTask(e.target.value)}
-            />
-            {editTask ? (
-                <Button variant="contained" color="success" onClick={saveEditedTask}>
-                    Save
-                </Button>
-            ) : (
-                <Button variant="contained" component="label" onClick={addTask}>
-                    Add Task
-                </Button>
-            )}
+            <form onSubmit={editTask ? saveEditedTask : addTask}>
+                <input
+                    className="border-b-2 solid gray-300 p-1 rounded mr-5 focus:outline-none"
+                    type="text"
+                    placeholder="Enter task"
+                    ref={inputRef}
+                    value={newTask}
+                    onChange={(e) => setNewTask(e.target.value)}
+                />
+                {editTask ? (
+                    <button className="p-2 bg-[#2E7D32] text-white rounded" onClick={saveEditedTask}>
+                        Save
+                    </button>
+                ) : (
+                    <button className="p-2 bg-[#1976D2] text-white rounded" onClick={addTask}>
+                        Add Task
+                    </button>
+                )}
+            </form>
         </div>
     );
 };
