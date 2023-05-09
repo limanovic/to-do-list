@@ -6,7 +6,19 @@ type Task = {
     id: number;
     name: string;
 };
-export default function TaskList({ tasks, editTask, saveEditedTask, editTaskName, removeTask }) {
+export default function TaskList({
+    tasks,
+    editTask,
+    saveEditedTask,
+    editTaskName,
+    removeTask,
+}: {
+    tasks: Task[];
+    saveEditedTask: () => void;
+    editTask: Task | null;
+    editTaskName: (task: Task) => void;
+    removeTask: (id: number) => void;
+}) {
     return (
         <ul>
             {tasks.map((task: Task) => (
