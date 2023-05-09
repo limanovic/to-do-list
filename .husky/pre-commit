@@ -1,4 +1,4 @@
-#!/bin/sh
+!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# yarn lint-staged && yarn tscheck && yarn lint // uncomment this line of code
+yarn lint-staged && yarn tscheck && yarn lint

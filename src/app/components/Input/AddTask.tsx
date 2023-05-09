@@ -20,7 +20,7 @@ const AddTask = ({
     tasks: Task[];
     setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
     saveEditedTask: () => void;
-    editTask: Task;
+    editTask: Task | null;
 }) => {
     const addTask = () => {
         if (newTask.trim() !== '') {

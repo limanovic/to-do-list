@@ -1,5 +1,5 @@
 import React from 'react';
-import addTask from '../Input/AddTask';
+import { Button } from '@mui/material';
 
 type Task = {
     id: number;
@@ -14,26 +14,31 @@ export default function OneTask({
     saveEditedTask,
 }: {
     task: Task;
-    removeTask: () => void;
-    editTaskName: () => void;
+    removeTask: (id: number) => void;
+    editTaskName: (task: Task) => void;
     saveEditedTask: () => void;
-    editTask: Task;
+    editTask: Task | null;
 }) {
     return (
         <>
             {task.name}
-            <button className="p-1 bg-red-500 text-white rounded" onClick={() => removeTask(task.id)}>
+            <Button onClick={() => removeTask(task.id)} variant="outlined"}>
+            Delete
+        </Button >
+        {/* <button className="p-1 bg-red-500 text-white rounded" onClick={() => removeTask(task.id)}>
                 Remove
+            </button> */}
+    {
+        editTask && editTask.id === task.id ? (
+            <button className="p-1 bg-green-500 text-white rounded" onClick={saveEditedTask}>
+                Save
             </button>
-            {editTask && editTask.id === task.id ? (
-                <button className="p-1 bg-green-500 text-white rounded" onClick={saveEditedTask}>
-                    Save
-                </button>
-            ) : (
-                <button className="p-1 bg-yellow-500 text-white rounded mr-1" onClick={() => editTaskName(task)}>
-                    Edit
-                </button>
-            )}
+        ) : (
+        <button className="p-1 bg-yellow-500 text-white rounded mr-1" onClick={() => editTaskName(task)}>
+            Edit
+        </button>
+    )
+    }
         </>
     );
 }
