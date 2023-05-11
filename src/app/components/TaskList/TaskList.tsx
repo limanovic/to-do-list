@@ -1,5 +1,6 @@
 'use client';
-import { FormEventHandler } from 'react';
+import { useState } from 'react';
+import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import Task from '../Task/Task';
 
 type Task = {
@@ -9,21 +10,22 @@ type Task = {
 export default function TaskList({
     tasks,
     editTaskName,
-    removeTask,
+    setTasks,
 }: {
     tasks: Task[];
-    saveEditedTask: FormEventHandler<HTMLFormElement>;
     editTask: Task | null;
     editTaskName: (task: Task) => void;
-    removeTask: (id: number) => void;
+    setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
 }) {
     return (
-        <ul>
-            {tasks.map((task: Task) => (
-                <li key={task.id} className="flex items-center mb-2 justify-center">
-                    <Task task={task} removeTask={removeTask} editTaskName={editTaskName} />
-                </li>
-            ))}
-        </ul>
+        <>
+            <ul>
+                {tasks.map((task: Task) => (
+                    <li key={task.id} className="flex items-center mb-2 justify-center">
+                        <Task task={task} tasks={tasks} setTasks={setTasks} editTaskName={editTaskName} />
+                    </li>
+                ))}
+            </ul>
+        </>
     );
 }

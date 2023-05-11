@@ -17,16 +17,6 @@ export default function App() {
     const [openModal, setOpenModal] = useState<boolean>(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
 
-    const saveEditedTask: FormEventHandler<HTMLFormElement> = (e: SyntheticEvent) => {
-        e.preventDefault();
-        if (editTask) {
-            if (newTask.length < 1 || newTask.trim() === '') {
-                alert('Task cannot be blank');
-            } else {
-                setOpenModal(true);
-            }
-        }
-    };
     const editTaskName = (task: Task) => {
         setEditTask(task);
         setNewTask(task.name);
@@ -50,31 +40,13 @@ export default function App() {
                     tasks={tasks}
                     setTasks={setTasks}
                     editTask={editTask}
-                    saveEditedTask={saveEditedTask}
                     inputRef={inputRef}
+                    setOpenModal={setOpenModal}
+                    openModal={openModal}
+                    setEditTask={setEditTask}
                 />
             </div>
-            <TaskList
-                tasks={tasks}
-                editTask={editTask}
-                saveEditedTask={saveEditedTask}
-                editTaskName={editTaskName}
-                removeTask={removeTask}
-            />
-            {openModal ? (
-                <ConfirmModal
-                    openModal={openModal}
-                    setOpenModal={setOpenModal}
-                    setEditTask={setEditTask}
-                    setNewTask={setNewTask}
-                    setTasks={setTasks}
-                    editTask={editTask}
-                    newTask={newTask}
-                    tasks={tasks}
-                />
-            ) : (
-                ''
-            )}
+            <TaskList tasks={tasks} editTask={editTask} editTaskName={editTaskName} setTasks={setTasks} />
         </div>
     );
 }

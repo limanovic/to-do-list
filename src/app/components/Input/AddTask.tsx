@@ -1,5 +1,6 @@
 'use client';
 import React, { FormEventHandler, SyntheticEvent } from 'react';
+import ConfirmModal from '../ConfirmModal/ConfirmModal';
 
 type Task = {
     id: number;
@@ -11,17 +12,21 @@ const AddTask = ({
     setNewTask,
     tasks,
     setTasks,
-    saveEditedTask,
     editTask,
     inputRef,
+    setOpenModal,
+    openModal,
+    setEditTask,
 }: {
     newTask: string;
     setNewTask: React.Dispatch<React.SetStateAction<string>>;
     tasks: Task[];
     setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
-    saveEditedTask: FormEventHandler<HTMLFormElement>;
     editTask: Task | null;
     inputRef: any;
+    setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+    openModal: boolean;
+    setEditTask: React.Dispatch<React.SetStateAction<Task | null>>;
 }) => {
     const addTask: FormEventHandler<HTMLFormElement> = (e: SyntheticEvent) => {
         e.preventDefault();
@@ -33,6 +38,34 @@ const AddTask = ({
             setTasks([...tasks, task]);
             setNewTask('');
         }
+    };
+    const saveEditedTask: FormEventHandler<HTMLFormElement> = (e: SyntheticEvent) => {
+        e.preventDefault();
+        if (editTask) {
+            if (newTask.length < 1 || newTask.trim() === '') {
+                alert('Task cannot be blank');
+            } else {
+                setOpenModal(true);
+            }
+        }
+    };
+    const confirmed = () => {
+        if (editTask) {
+            const updatedTasks: Task[] = tasks.map((task: Task) =>
+                task.id === editTask.id ? { ...task, name: newTask } : task,
+            );
+            if (newTask.length < 1 || newTask.trim() === '') {
+                alert('Task cannot be blank');
+            } else {
+                setTasks(updatedTasks);
+                setNewTask('');
+                setEditTask(null);
+            }
+            setOpenModal(false);
+        }
+    };
+    const notConfirmed = () => {
+        setOpenModal(false);
     };
     return (
         <div>
@@ -65,6 +98,7 @@ const AddTask = ({
                     </button>
                 </form>
             )}
+            {openModal ? <ConfirmModal openModal={openModal} onConfirm={confirmed} onCancel={notConfirmed} /> : ''}
         </div>
     );
 };

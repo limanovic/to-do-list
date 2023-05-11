@@ -1,52 +1,21 @@
 import { Modal, Box, Typography } from '@mui/material';
-import style from 'styled-jsx/style';
+import React from 'react';
 
-type Task = {
-    id: number;
-    name: string;
+type ModalProps = {
+    openModal: boolean;
+    onConfirm?: (id?: number) => void;
+    onCancel: () => void;
 };
 
-export default function ConfirmModal({
-    openModal,
-    setOpenModal,
-    setEditTask,
-    setNewTask,
-    setTasks,
-    editTask,
-    newTask,
-    tasks,
-}: {
-    openModal: boolean;
-    setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-    setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
-    editTask: Task | null;
-    newTask: string;
-    setNewTask: React.Dispatch<React.SetStateAction<string>>;
-    setEditTask: React.Dispatch<React.SetStateAction<Task | null>>;
-    tasks: Task[];
-}) {
-    const confirmed = () => {
-        if (editTask) {
-            const updatedTasks: Task[] = tasks.map((task: Task) =>
-                task.id === editTask.id ? { ...task, name: newTask } : task,
-            );
-            if (newTask.length < 1 || newTask.trim() === '') {
-                alert('Task cannot be blank');
-            } else {
-                setTasks(updatedTasks);
-                setNewTask('');
-                setEditTask(null);
-            }
-            setOpenModal(false);
+const ConfirmModal: React.FC<ModalProps> = ({ openModal, onConfirm, onCancel }) => {
+    const handleConfirm = (id?: number) => {
+        if (onConfirm) {
+            onConfirm(id);
         }
-    };
-    const notConfirmed = () => {
-        setOpenModal(false);
     };
     return (
         <Modal
             open={openModal}
-            onClose={notConfirmed}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
             className="flex items-center justify-center">
@@ -55,14 +24,15 @@ export default function ConfirmModal({
                     Are you sure?
                 </Typography>
                 <Typography id="modal-modal-description" className=" gap-y-2">
-                    <button className="p-2 w-20 rounded border border-gray-300" onClick={confirmed}>
+                    <button className="p-2 w-20 rounded border border-gray-300" onClick={() => handleConfirm()}>
                         Yes
                     </button>
-                    <button className="p-2 w-20 rounded border border-gray-300" onClick={notConfirmed}>
+                    <button className="p-2 w-20 rounded border border-gray-300" onClick={onCancel}>
                         No
                     </button>
                 </Typography>
             </Box>
         </Modal>
     );
-}
+};
+export default ConfirmModal;
