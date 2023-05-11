@@ -1,5 +1,5 @@
 'use client';
-import React, { FormEventHandler, MouseEventHandler } from 'react';
+import React, { FormEventHandler, MouseEventHandler, SyntheticEvent } from 'react';
 
 type Task = {
     id: number;
@@ -19,13 +19,11 @@ const AddTask = ({
     setNewTask: React.Dispatch<React.SetStateAction<string>>;
     tasks: Task[];
     setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
-    saveEditedTask: MouseEventHandler<HTMLButtonElement> | FormEventHandler<HTMLFormElement>;
+    saveEditedTask: FormEventHandler<HTMLFormElement>;
     editTask: Task | null;
     inputRef: any;
 }) => {
-    const addTask: FormEventHandler<HTMLFormElement> | MouseEventHandler<HTMLButtonElement> = (e: {
-        preventDefault: () => void;
-    }) => {
+    const addTask: FormEventHandler<HTMLFormElement> = (e: SyntheticEvent) => {
         e.preventDefault();
         if (newTask.trim() !== '') {
             const task: Task = {
@@ -38,12 +36,7 @@ const AddTask = ({
     };
     return (
         <div>
-            <form
-                onSubmit={
-                    editTask
-                        ? (saveEditedTask as FormEventHandler<HTMLFormElement>)
-                        : (addTask as FormEventHandler<HTMLFormElement>)
-                }>
+            <form onSubmit={editTask ? saveEditedTask : addTask}>
                 <input
                     className="border-b-2 solid gray-300 p-1 rounded mr-5 focus:outline-none"
                     type="text"
@@ -53,15 +46,11 @@ const AddTask = ({
                     onChange={(e) => setNewTask(e.target.value)}
                 />
                 {editTask ? (
-                    <button
-                        className="p-2 bg-[#2E7D32] text-white rounded"
-                        onClick={saveEditedTask as MouseEventHandler<HTMLButtonElement>}>
+                    <button type="submit" className="p-2 bg-[#2E7D32] text-white rounded">
                         Save
                     </button>
                 ) : (
-                    <button
-                        className="p-2 bg-[#1976D2] text-white rounded"
-                        onClick={addTask as MouseEventHandler<HTMLButtonElement>}>
+                    <button type="submit" className="p-2 bg-[#1976D2] text-white rounded">
                         Add Task
                     </button>
                 )}

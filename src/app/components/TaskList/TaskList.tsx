@@ -1,5 +1,5 @@
 'use client';
-import { FormEventHandler, MouseEventHandler } from 'react';
+import { FormEventHandler } from 'react';
 import Task from '../Task/Task';
 
 type Task = {
@@ -12,7 +12,7 @@ export default function TaskList({
     removeTask,
 }: {
     tasks: Task[];
-    saveEditedTask: MouseEventHandler<HTMLButtonElement> | FormEventHandler<HTMLFormElement>;
+    saveEditedTask: FormEventHandler<HTMLFormElement>;
     editTask: Task | null;
     editTaskName: (task: Task) => void;
     removeTask: (id: number) => void;
