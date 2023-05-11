@@ -36,25 +36,35 @@ const AddTask = ({
     };
     return (
         <div>
-            <form onSubmit={editTask ? saveEditedTask : addTask}>
-                <input
-                    className="border-b-2 solid gray-300 p-1 rounded mr-5 focus:outline-none"
-                    type="text"
-                    placeholder="Enter task"
-                    ref={inputRef}
-                    value={newTask}
-                    onChange={(e) => setNewTask(e.target.value)}
-                />
-                {editTask ? (
+            {editTask ? (
+                <form onSubmit={saveEditedTask}>
+                    <input
+                        className="border-b-2 solid gray-300 p-1 rounded mr-5 focus:outline-none"
+                        type="text"
+                        placeholder="Enter task"
+                        ref={inputRef}
+                        value={newTask}
+                        onChange={(e) => setNewTask(e.target.value)}
+                    />
                     <button type="submit" className="p-2 bg-[#2E7D32] text-white rounded">
                         Save
                     </button>
-                ) : (
+                </form>
+            ) : (
+                <form onSubmit={addTask}>
+                    <input
+                        className="border-b-2 solid gray-300 p-1 rounded mr-5 focus:outline-none"
+                        type="text"
+                        placeholder="Enter task"
+                        ref={inputRef}
+                        value={newTask}
+                        onChange={(e) => setNewTask(e.target.value)}
+                    />
                     <button type="submit" className="p-2 bg-[#1976D2] text-white rounded">
                         Add Task
                     </button>
-                )}
-            </form>
+                </form>
+            )}
         </div>
     );
 };
