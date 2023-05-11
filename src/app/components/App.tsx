@@ -3,6 +3,7 @@
 import React, { FormEventHandler, SyntheticEvent, useRef, useState } from 'react';
 import AddTask from './Input/AddTask';
 import TaskList from './TaskList/TaskList';
+import ConfirmModal from './ConfirmModal/ConfirmModal';
 
 type Task = {
     id: number;
@@ -13,24 +14,19 @@ export default function App() {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [newTask, setNewTask] = useState('');
     const [editTask, setEditTask] = useState<Task | null>(null);
+    const [openModal, setOpenModal] = useState<boolean>(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     const saveEditedTask: FormEventHandler<HTMLFormElement> = (e: SyntheticEvent) => {
         e.preventDefault();
         if (editTask) {
-            const updatedTasks = tasks.map((task: Task) =>
-                task.id === editTask.id ? { ...task, name: newTask } : task,
-            );
-            if (typeof newTask.length < 1 || newTask.trim() === '') {
+            if (newTask.length < 1 || newTask.trim() === '') {
                 alert('Task cannot be blank');
             } else {
-                setTasks(updatedTasks);
-                setNewTask('');
-                setEditTask(null);
+                setOpenModal(true);
             }
         }
     };
-
     const editTaskName = (task: Task) => {
         setEditTask(task);
         setNewTask(task.name);
@@ -65,6 +61,20 @@ export default function App() {
                 editTaskName={editTaskName}
                 removeTask={removeTask}
             />
+            {openModal ? (
+                <ConfirmModal
+                    openModal={openModal}
+                    setOpenModal={setOpenModal}
+                    setEditTask={setEditTask}
+                    setNewTask={setNewTask}
+                    setTasks={setTasks}
+                    editTask={editTask}
+                    newTask={newTask}
+                    tasks={tasks}
+                />
+            ) : (
+                ''
+            )}
         </div>
     );
 }

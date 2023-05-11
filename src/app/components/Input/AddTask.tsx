@@ -1,5 +1,5 @@
 'use client';
-import React, { FormEventHandler, MouseEventHandler, SyntheticEvent } from 'react';
+import React, { FormEventHandler, SyntheticEvent } from 'react';
 
 type Task = {
     id: number;
