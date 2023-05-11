@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { FormEventHandler, MouseEventHandler, useRef, useState } from 'react';
 import AddTask from './Input/AddTask';
 import TaskList from './TaskList/TaskList';
 
@@ -15,7 +15,9 @@ export default function App() {
     const [editTask, setEditTask] = useState<Task | null>(null);
     const inputRef = useRef<HTMLInputElement | null>(null);
 
-    const saveEditedTask = (e: { preventDefault: () => void }) => {
+    const saveEditedTask: FormEventHandler<HTMLFormElement> | MouseEventHandler<HTMLButtonElement> = (e: {
+        preventDefault: () => void;
+    }) => {
         e.preventDefault();
         if (editTask) {
             const updatedTasks = tasks.map((task: Task) =>

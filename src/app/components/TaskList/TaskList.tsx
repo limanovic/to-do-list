@@ -1,4 +1,5 @@
 'use client';
+import { FormEventHandler, MouseEventHandler } from 'react';
 import Task from '../Task/Task';
 
 type Task = {
@@ -7,13 +8,11 @@ type Task = {
 };
 export default function TaskList({
     tasks,
-    editTask,
-    saveEditedTask,
     editTaskName,
     removeTask,
 }: {
     tasks: Task[];
-    saveEditedTask: (e: { preventDefault: () => void }) => void;
+    saveEditedTask: MouseEventHandler<HTMLButtonElement> | FormEventHandler<HTMLFormElement>;
     editTask: Task | null;
     editTaskName: (task: Task) => void;
     removeTask: (id: number) => void;
@@ -22,13 +21,7 @@ export default function TaskList({
         <ul>
             {tasks.map((task: Task) => (
                 <li key={task.id} className="flex items-center mb-2 justify-center">
-                    <Task
-                        task={task}
-                        removeTask={removeTask}
-                        editTask={editTask}
-                        saveEditedTask={saveEditedTask}
-                        editTaskName={editTaskName}
-                    />
+                    <Task task={task} removeTask={removeTask} editTaskName={editTaskName} />
                 </li>
             ))}
         </ul>
