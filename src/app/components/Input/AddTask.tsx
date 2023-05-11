@@ -54,7 +54,7 @@ const AddTask = ({
             const updatedTasks: Task[] = tasks.map((task: Task) =>
                 task.id === editTask.id ? { ...task, name: newTask } : task,
             );
-            if (newTask.length < 1 || newTask.trim() === '') {
+            if (!newTask || newTask.trim() === '') {
                 alert('Task cannot be blank');
             } else {
                 setTasks(updatedTasks);
@@ -98,7 +98,7 @@ const AddTask = ({
                     </button>
                 </form>
             )}
-            {openModal ? <ConfirmModal openModal={openModal} onConfirm={confirmed} onCancel={notConfirmed} /> : ''}
+            {openModal && <ConfirmModal openModal={openModal} onConfirm={confirmed} onCancel={notConfirmed} />}
         </div>
     );
 };

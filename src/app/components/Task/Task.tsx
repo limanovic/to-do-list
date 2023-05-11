@@ -39,10 +39,8 @@ export default function Task({
             <Button className="mr-5" variant="contained" onClick={() => editTaskName(task)}>
                 Edit
             </Button>
-            {removeModal ? (
+            {removeModal && (
                 <ConfirmModal openModal={removeModal} onConfirm={() => confirmed(task.id)} onCancel={notConfirmed} />
-            ) : (
-                ''
             )}
         </div>
     );
