@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FormEventHandler, MouseEventHandler, SyntheticEvent, useRef, useState } from 'react';
+import React, { FormEventHandler, SyntheticEvent, useRef, useState } from 'react';
 import AddTask from './Input/AddTask';
 import TaskList from './TaskList/TaskList';
 
@@ -21,7 +21,7 @@ export default function App() {
             const updatedTasks = tasks.map((task: Task) =>
                 task.id === editTask.id ? { ...task, name: newTask } : task,
             );
-            if (typeof newTask !== 'string' || newTask.length !== 1 || newTask.trim() === '') {
+            if (typeof newTask !== 'string' || newTask.length < 1 || newTask.trim() === '') {
                 alert('Task cannot be blank');
             } else {
                 setTasks(updatedTasks);
