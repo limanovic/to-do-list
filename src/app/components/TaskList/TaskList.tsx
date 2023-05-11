@@ -1,6 +1,4 @@
 'use client';
-import { useState } from 'react';
-import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import Task from '../Task/Task';
 
 type Task = {

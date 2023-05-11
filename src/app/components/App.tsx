@@ -1,9 +1,8 @@
 'use client';
 
-import React, { FormEventHandler, SyntheticEvent, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import AddTask from './Input/AddTask';
 import TaskList from './TaskList/TaskList';
-import ConfirmModal from './ConfirmModal/ConfirmModal';
 
 type Task = {
     id: number;
@@ -23,11 +22,6 @@ export default function App() {
         if (inputRef.current) {
             inputRef.current.focus();
         }
-    };
-
-    const removeTask = (id: number) => {
-        const updatedTasks = tasks.filter((task: Task) => task.id !== id);
-        setTasks(updatedTasks);
     };
 
     return (
