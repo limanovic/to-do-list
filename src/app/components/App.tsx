@@ -21,7 +21,7 @@ export default function App() {
             const updatedTasks = tasks.map((task: Task) =>
                 task.id === editTask.id ? { ...task, name: newTask } : task,
             );
-            if (newTask == '') {
+            if (typeof newTask !== 'string' || newTask.length !== 1 || newTask.trim() === '') {
                 alert('Task cannot be blank');
             } else {
                 setTasks(updatedTasks);
