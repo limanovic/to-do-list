@@ -21,9 +21,13 @@ export default function App() {
             const updatedTasks = tasks.map((task: Task) =>
                 task.id === editTask.id ? { ...task, name: newTask } : task,
             );
-            setTasks(updatedTasks);
-            setNewTask('');
-            setEditTask(null);
+            if (newTask == '') {
+                alert('Task cannot be blank');
+            } else {
+                setTasks(updatedTasks);
+                setNewTask('');
+                setEditTask(null);
+            }
         }
     };
 

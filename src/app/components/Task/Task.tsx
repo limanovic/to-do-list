@@ -5,7 +5,6 @@ type Task = {
     id: number;
     name: string;
 };
-
 export default function Task({
     task,
     removeTask,
