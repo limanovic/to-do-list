@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import React, { useState } from 'react';
-import ConfirmModal from '../ConfirmModal/ConfirmModal';
+import ConfirmModal from '../ConfirmModal';
 
 type Task = {
     id: number;
@@ -18,6 +18,7 @@ export default function Task({
     setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
 }) {
     const [removeModal, setRemoveModal] = useState<boolean>(false);
+    const [isChecked, setIsChecked] = useState<boolean>(false);
 
     const removeTask = () => {
         setRemoveModal(true);
@@ -30,9 +31,13 @@ export default function Task({
     const notConfirmed = () => {
         setRemoveModal(false);
     };
+    const toggleCheckbox = () => {
+        setIsChecked(!isChecked);
+    };
     return (
         <div className="flex gap-x-4">
-            <h4 className="pr-5 flex self-center">{task.name}</h4>
+            <h4 className={`pr-5 flex self-center ${isChecked ? 'text-green-500' : ''}`}>{task.name}</h4>
+            <input type="checkbox" checked={isChecked} onChange={toggleCheckbox} className="mr-2" />
             <Button className="mr-5" variant="outlined" color="error" onClick={removeTask}>
                 Delete
             </Button>

@@ -1,6 +1,6 @@
 'use client';
 import React, { FormEventHandler, SyntheticEvent } from 'react';
-import ConfirmModal from '../ConfirmModal/ConfirmModal';
+import ConfirmModal from '../ConfirmModal';
 
 type Task = {
     id: number;
