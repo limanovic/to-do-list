@@ -19,9 +19,12 @@ export default function TaskList({
         <>
             <ul>
                 {tasks.map((task: Task) => (
-                    <li key={task.id} className="flex items-center mb-2 justify-center">
-                        <Task task={task} tasks={tasks} setTasks={setTasks} editTaskName={editTaskName} />
-                    </li>
+                    <div key={task.id}>
+                        <li key={task.id} className="flex items-center mb-2 justify-center">
+                            <Task task={task} tasks={tasks} setTasks={setTasks} editTaskName={editTaskName} />
+                        </li>
+                        <hr />
+                    </div>
                 ))}
             </ul>
         </>

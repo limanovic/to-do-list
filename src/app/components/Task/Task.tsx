@@ -35,13 +35,15 @@ export default function Task({
         setIsChecked(!isChecked);
     };
     return (
-        <div className="flex gap-x-4">
-            <h4 className={`pr-5 flex self-center ${isChecked ? 'text-green-500' : ''}`}>{task.name}</h4>
+        <div className={`flex justify-between gap-x-4 rounded p-4 items-center ${isChecked && 'bg-green-500'}`}>
+            <div className=" w-[200px] break-all">
+                <h4 className="pr-5 flex self-center">{task.name}</h4>
+            </div>
             <input type="checkbox" checked={isChecked} onChange={toggleCheckbox} className="mr-2" />
-            <Button className="mr-5" variant="outlined" color="error" onClick={removeTask}>
+            <Button className="mr-5 h-[40px]" variant="outlined" color="error" onClick={removeTask}>
                 Delete
             </Button>
-            <Button className="mr-5" variant="contained" onClick={() => editTaskName(task)}>
+            <Button className="mr-5 h-[40px]" variant="contained" onClick={() => editTaskName(task)}>
                 Edit
             </Button>
             {removeModal && (
