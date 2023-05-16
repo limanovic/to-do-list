@@ -9,7 +9,7 @@ type Task = {
     name: string;
     isEditing: string | null;
 };
-export default function Task({ task }: { task: Task; tasks: Task[] }) {
+export default function Task({ task }: { task: Task }) {
     const [removeModal, setRemoveModal] = useState<boolean>(false);
     const [isChecked, setIsChecked] = useState<boolean>(false);
 

@@ -18,7 +18,7 @@ export default function TaskList() {
                 {tasks?.map((task: Task) => (
                     <div key={task.id}>
                         <li key={task.id} className="flex items-center mb-2 justify-center">
-                            <Task task={task} tasks={tasks} />
+                            <Task task={task} />
                         </li>
                         <hr />
                     </div>
