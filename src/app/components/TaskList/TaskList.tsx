@@ -1,27 +1,24 @@
 'use client';
+import { useSelector } from 'react-redux';
 import Task from '../Task/Task';
 
 type Task = {
     id: number;
     name: string;
+    isEditing: string | null;
 };
-export default function TaskList({
-    tasks,
-    editTaskName,
-    setTasks,
-}: {
+interface RootState {
     tasks: Task[];
-    editTask: Task | null;
-    editTaskName: (task: Task) => void;
-    setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
-}) {
+}
+export default function TaskList() {
+    const tasks = useSelector((state: RootState) => state.tasks);
     return (
         <>
             <ul>
-                {tasks.map((task: Task) => (
+                {tasks?.map((task: Task) => (
                     <div key={task.id}>
                         <li key={task.id} className="flex items-center mb-2 justify-center">
-                            <Task task={task} tasks={tasks} setTasks={setTasks} editTaskName={editTaskName} />
+                            <Task task={task} tasks={tasks} />
                         </li>
                         <hr />
                     </div>
