@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ConfirmModal from '../ConfirmModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTask, saveInputChange } from '../Redux/addTaskSlice';
@@ -44,6 +44,12 @@ const AddTask = () => {
         setChangedName('');
         setSaveModal(false);
     };
+    useEffect(() => {
+        if (task && task.isEditing && inputRef.current) {
+            inputRef.current.focus();
+        }
+    }, [task?.isEditing]);
+
     return (
         <div>
             {task && task.isEditing ? (
