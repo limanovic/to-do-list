@@ -48,7 +48,7 @@ const AddTask = () => {
         if (task && task.isEditing && inputRef.current) {
             inputRef.current.focus();
         }
-    }, [task?.isEditing]);
+    }, [task, task?.isEditing]);
 
     return (
         <div>
