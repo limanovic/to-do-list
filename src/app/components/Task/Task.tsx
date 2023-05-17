@@ -2,29 +2,25 @@ import { Button } from '@mui/material';
 import React, { useState } from 'react';
 import ConfirmModal from '../ConfirmModal';
 import { useDispatch } from 'react-redux';
-import { removeTask, editTask } from '../Redux/addTaskSlice';
+import { removeTask, editTask } from '../Redux/tasks/slice';
+import { TaskType } from '../Redux/types';
 
-type Task = {
-    id: number;
-    name: string;
-    isEditing: string | null;
-};
-export default function Task({ task }: { task: Task }) {
-    const [removeModal, setRemoveModal] = useState<boolean>(false);
+export default function Task({ task }: { task: TaskType }) {
+    const [modalOpened, setmodalOpened] = useState<boolean>(false);
     const [isChecked, setIsChecked] = useState<boolean>(false);
 
     const removeTaskModal = () => {
-        setRemoveModal(true);
+        setmodalOpened(true);
     };
     const dispatch = useDispatch();
 
     const notConfirmed = () => {
-        setRemoveModal(false);
+        setmodalOpened(false);
     };
     const toggleCheckbox = () => {
         setIsChecked(!isChecked);
     };
-    const handleRemoveTask = (e: Task) => {
+    const handleRemoveTask = (e: TaskType) => {
         dispatch(removeTask(e.id));
     };
     const handleInputChange = (e: number) => {
@@ -42,9 +38,9 @@ export default function Task({ task }: { task: Task }) {
             <Button className="mr-5 h-[40px]" variant="contained" onClick={() => handleInputChange(task.id)}>
                 Edit
             </Button>
-            {removeModal && (
+            {modalOpened && (
                 <ConfirmModal
-                    openModal={removeModal}
+                    openModal={modalOpened}
                     onConfirm={() => handleRemoveTask(task)}
                     onCancel={notConfirmed}
                 />
