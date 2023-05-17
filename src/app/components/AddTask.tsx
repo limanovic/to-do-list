@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addTask, saveTask } from './Redux/tasks/slice';
 import { RootState } from './Redux/types';
 import { Task as TaskType } from './Redux/types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const AddTask = () => {
     const dispatch = useDispatch();
@@ -69,17 +71,13 @@ const AddTask = () => {
                         value={newTask?.name}
                         onChange={(e) => setNewTask({ name: e.target.value, id: new Date().getTime() })}
                     />
-                    <button type="submit" className="p-2 bg-[#1976D2] text-white rounded">
-                        Add Task
+                    <button type="submit" className="p-2 bg-[#1976D2] w-[60px] text-white rounded">
+                        <FontAwesomeIcon icon={faPlus} />
                     </button>
                 </form>
             )}
             {modalOpened && (
-                <ConfirmModal
-                    openModal={modalOpened}
-                    onConfirm={inputChangeConfirmed}
-                    onCancel={inputChangeNotConfirmed}
-                />
+                <ConfirmModal openModal={true} onConfirm={inputChangeConfirmed} onCancel={inputChangeNotConfirmed} />
             )}
         </div>
     );
