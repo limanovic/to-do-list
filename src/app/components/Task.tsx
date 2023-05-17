@@ -38,9 +38,7 @@ export default function Task({ task }: { task: TaskType }) {
             <Button className="mr-5 h-[40px]" variant="contained" onClick={() => handleInputChange(task.id)}>
                 Edit
             </Button>
-            {modalOpened && (
-                <ConfirmModal openModal={modalOpened} onConfirm={handleRemoveTask} onCancel={notConfirmed} />
-            )}
+            {modalOpened && <ConfirmModal openModal={true} onConfirm={handleRemoveTask} onCancel={notConfirmed} />}
         </div>
     );
 }

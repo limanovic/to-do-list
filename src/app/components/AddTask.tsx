@@ -10,17 +10,17 @@ const AddTask = () => {
     const dispatch = useDispatch();
 
     const inputRef = useRef<HTMLInputElement>(null);
-    const [taskName, setTaskName] = useState<TaskType>();
+    const [newTask, setNewTask] = useState<TaskType>();
     const [changedName, setChangedName] = useState<string>('');
-    const [modalOpened, setModalOpened] = useState<boolean>(false);
+    const [modalOpened, setModalOpened] = useState<boolean>();
     let tasks = useSelector((state: RootState) => state.tasks);
     const task = tasks.find((task: TaskType) => task.name === task.isEditing);
 
     const handleAddTask = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!taskName || !taskName.name.trim()) alert('Task cannot be empty');
-        else dispatch(addTask(taskName));
-        setTaskName({ name: '', id: 0 });
+        if (!newTask || !newTask.name.trim()) alert('Task cannot be empty');
+        else dispatch(addTask(newTask));
+        setNewTask({ name: '', id: 0 });
     };
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setChangedName(e.target.value);
@@ -66,8 +66,8 @@ const AddTask = () => {
                         type="text"
                         placeholder="Enter task"
                         ref={inputRef}
-                        value={taskName?.name}
-                        onChange={(e) => setTaskName({ name: e.target.value, id: new Date().getTime() })}
+                        value={newTask?.name}
+                        onChange={(e) => setNewTask({ name: e.target.value, id: new Date().getTime() })}
                     />
                     <button type="submit" className="p-2 bg-[#1976D2] text-white rounded">
                         Add Task
