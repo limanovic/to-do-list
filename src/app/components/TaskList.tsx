@@ -1,6 +1,6 @@
 'use client';
 import { useSelector } from 'react-redux';
-import { TaskType, RootState } from './Redux/types';
+import { RootState } from './Redux/types';
 import Task from './Task';
 
 export default function TaskList() {
@@ -8,7 +8,7 @@ export default function TaskList() {
     return (
         <>
             <ul>
-                {tasks?.map((task: TaskType) => (
+                {tasks?.map((task) => (
                     <div key={task.id}>
                         <li key={task.id} className="flex items-center mb-2 justify-center">
                             <Task task={task} />

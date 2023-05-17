@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import ConfirmModal from './ConfirmModal';
 import { useDispatch } from 'react-redux';
 import { removeTask, editTask } from './Redux/tasks/slice';
-import { TaskType } from './Redux/types';
+import { Task as TaskType } from './Redux/types';
 
 export default function Task({ task }: { task: TaskType }) {
     const [modalOpened, setmodalOpened] = useState<boolean>(false);
@@ -20,8 +20,8 @@ export default function Task({ task }: { task: TaskType }) {
     const toggleCheckbox = () => {
         setIsChecked(!isChecked);
     };
-    const handleRemoveTask = (e: TaskType) => {
-        dispatch(removeTask(e.id));
+    const handleRemoveTask = () => {
+        dispatch(removeTask(task.id));
     };
     const handleInputChange = (e: number) => {
         dispatch(editTask(e));
@@ -39,11 +39,7 @@ export default function Task({ task }: { task: TaskType }) {
                 Edit
             </Button>
             {modalOpened && (
-                <ConfirmModal
-                    openModal={modalOpened}
-                    onConfirm={() => handleRemoveTask(task)}
-                    onCancel={notConfirmed}
-                />
+                <ConfirmModal openModal={modalOpened} onConfirm={handleRemoveTask} onCancel={notConfirmed} />
             )}
         </div>
     );

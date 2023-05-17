@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { TaskType } from '../types';
+import { Task as TaskType } from '../types';
 
 const taskSlice = createSlice({
     name: 'tasks',
