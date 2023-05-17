@@ -1,7 +1,7 @@
 'use client';
 import { useSelector } from 'react-redux';
-import { TaskType, RootState } from '../Redux/types';
-import Task from '../Task/Task';
+import { TaskType, RootState } from './Redux/types';
+import Task from './Task';
 
 export default function TaskList() {
     const tasks = useSelector((state: RootState) => state.tasks);

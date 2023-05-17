@@ -1,9 +1,9 @@
 import { Button } from '@mui/material';
 import React, { useState } from 'react';
-import ConfirmModal from '../ConfirmModal';
+import ConfirmModal from './ConfirmModal';
 import { useDispatch } from 'react-redux';
-import { removeTask, editTask } from '../Redux/tasks/slice';
-import { TaskType } from '../Redux/types';
+import { removeTask, editTask } from './Redux/tasks/slice';
+import { TaskType } from './Redux/types';
 
 export default function Task({ task }: { task: TaskType }) {
     const [modalOpened, setmodalOpened] = useState<boolean>(false);

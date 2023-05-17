@@ -1,9 +1,9 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
-import ConfirmModal from '../ConfirmModal';
+import ConfirmModal from './ConfirmModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTask, saveTask } from '../Redux/tasks/slice';
-import { TaskType, RootState } from '../Redux/types';
+import { addTask, saveTask } from './Redux/tasks/slice';
+import { TaskType, RootState } from './Redux/types';
 
 const AddTask = () => {
     const dispatch = useDispatch();
