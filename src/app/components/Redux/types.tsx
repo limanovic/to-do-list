@@ -1,9 +1,9 @@
-export type TaskType = {
+export type Task = {
     id: number;
     name: string;
     isEditing?: string;
 };
 
 export interface RootState {
-    tasks: TaskType[];
+    tasks: Task[];
 }
