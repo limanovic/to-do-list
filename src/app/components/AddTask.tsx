@@ -39,9 +39,9 @@ const AddTask = () => {
     useEffect(() => {
         if (task && task.isEditing && inputRef.current) {
             inputRef.current.focus();
+            setChangedName(task.name);
         }
     }, [task, task?.isEditing]);
-
     return (
         <div>
             {task && task.isEditing ? (
@@ -51,7 +51,7 @@ const AddTask = () => {
                         type="text"
                         placeholder="Enter task"
                         ref={inputRef}
-                        defaultValue={task.name}
+                        value={changedName}
                         onChange={handleInputChange}
                     />
                     <button onClick={openmodalOpened} className="p-2 bg-[#2E7D32] text-white rounded">

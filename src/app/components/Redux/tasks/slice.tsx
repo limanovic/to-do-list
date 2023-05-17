@@ -12,6 +12,10 @@ const taskSlice = createSlice({
             return (state = state.filter((task) => task.id !== action.payload));
         },
         editTask: (state, action: PayloadAction<number>) => {
+            const editingTask = state.findIndex((task) => task.name == task.isEditing);
+            if (editingTask !== -1) {
+                state[editingTask].isEditing = undefined;
+            }
             const task = state.find((task) => task.id === action.payload);
             if (task) {
                 task.isEditing = task.name;
@@ -20,6 +24,7 @@ const taskSlice = createSlice({
         saveTask: (state, action: PayloadAction<string>) => {
             const editingTaskIndex = state.findIndex((task) => task.name == task.isEditing);
             state[editingTaskIndex].name = action.payload;
+            state[editingTaskIndex].isEditing = undefined;
         },
     },
 });
