@@ -16,7 +16,12 @@ export default function Test() {
                 <FontAwesomeIcon icon={faCheck} />
             </button>{' '}
             replaces <button className="text-[#1976D2] border border-[#1976D2] w-[60px] rounded">Done</button>,
-            indicating completion. When you click the{' '}
+            indicating completion. If you want to undo task click{' '}
+            <button className="text-[#1976D2]">
+                <FontAwesomeIcon icon={faCheck} />
+            </button>
+            {'. '}
+            When you click the{' '}
             <Button variant="outlined" color="error">
                 <FontAwesomeIcon icon={faTrash} />
             </Button>
