@@ -1,18 +1,16 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import ConfirmModal from './ConfirmModal';
-import { useDispatch, useSelector } from 'react-redux';
 import { addTask, saveTask } from './Redux/tasks/slice';
-import { RootState } from './Redux/types';
 import { Task as TaskType } from './Redux/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { emptyTask } from './Redux/tasks/slice';
+import { useAppDispatch, useAppSelector } from './Redux/hooks';
 
 const AddTask = () => {
-    const dispatch = useDispatch();
-
-    let tasks = useSelector((state: RootState) => state.tasks);
+    let tasks = useAppSelector((state) => state.tasks);
+    const dispatch = useAppDispatch();
     const task = tasks.find((task: TaskType) => task.name === task.isEditing);
     const inputRef = useRef<HTMLInputElement>(null);
     const [newTask, setNewTask] = useState<TaskType>(emptyTask);
@@ -77,9 +75,7 @@ const AddTask = () => {
                     </button>
                 </form>
             )}
-            {modalOpened && (
-                <ConfirmModal openModal onConfirm={inputChangeConfirmed} onCancel={inputChangeNotConfirmed} />
-            )}
+            {modalOpened && <ConfirmModal onConfirm={inputChangeConfirmed} onCancel={inputChangeNotConfirmed} />}
         </div>
     );
 };

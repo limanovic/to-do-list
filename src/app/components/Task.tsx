@@ -8,16 +8,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faFilePen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export default function Task({ task }: { task: TaskType }) {
-    const [modalOpened, setModalOpened] = useState<boolean>(false);
+    const [openModal, setOpenModal] = useState<boolean>(false);
     const [isChecked, setIsChecked] = useState<boolean>(false);
 
     const removeTaskModal = () => {
-        setModalOpened(true);
+        setOpenModal(true);
     };
     const dispatch = useDispatch();
 
-    const notConfirmed = () => {
-        setModalOpened(false);
+    const closeModal = () => {
+        setOpenModal(false);
     };
     const toggleCheckbox = () => {
         setIsChecked(!isChecked);
@@ -53,7 +53,7 @@ export default function Task({ task }: { task: TaskType }) {
                     Done
                 </button>
             )}
-            {modalOpened && <ConfirmModal openModal onConfirm={handleRemoveTask} onCancel={notConfirmed} />}
+            {openModal && <ConfirmModal onConfirm={handleRemoveTask} onCancel={closeModal} />}
         </div>
     );
 }

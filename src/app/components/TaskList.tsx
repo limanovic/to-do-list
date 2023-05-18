@@ -1,24 +1,23 @@
 'use client';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from './Redux/types';
 import Task from './Task';
-import { clearTasks } from './Redux/tasks/slice';
+import { deleteTasks } from './Redux/tasks/slice';
 import { Button } from '@mui/material';
 import { useState } from 'react';
 import ConfirmModal from './ConfirmModal';
+import { useAppDispatch, useAppSelector } from './Redux/hooks';
 
 export default function TaskList() {
-    const tasks = useSelector((state: RootState) => state.tasks);
-    const dispatch = useDispatch();
+    const tasks = useAppSelector((state) => state.tasks);
+    const dispatch = useAppDispatch();
     const [modalOpened, setModalOpened] = useState<boolean>();
     const openModal = () => {
         setModalOpened(true);
     };
-    const notConfirmed = () => {
+    const closeModal = () => {
         setModalOpened(false);
     };
     const deleteAllTasks = () => {
-        dispatch(clearTasks());
+        dispatch(deleteTasks());
         setModalOpened(false);
     };
     return (
@@ -38,7 +37,7 @@ export default function TaskList() {
                         Delete all
                     </Button>
                 )}
-                {modalOpened && <ConfirmModal openModal onConfirm={deleteAllTasks} onCancel={notConfirmed} />}
+                {modalOpened && <ConfirmModal onConfirm={deleteAllTasks} onCancel={closeModal} />}
             </ul>
         </>
     );
