@@ -53,7 +53,7 @@ export default function Task({ task }: { task: TaskType }) {
                     Done
                 </button>
             )}
-            {modalOpened && <ConfirmModal openModal={true} onConfirm={handleRemoveTask} onCancel={notConfirmed} />}
+            {modalOpened && <ConfirmModal openModal onConfirm={handleRemoveTask} onCancel={notConfirmed} />}
         </div>
     );
 }

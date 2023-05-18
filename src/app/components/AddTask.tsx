@@ -77,7 +77,7 @@ const AddTask = () => {
                 </form>
             )}
             {modalOpened && (
-                <ConfirmModal openModal={true} onConfirm={inputChangeConfirmed} onCancel={inputChangeNotConfirmed} />
+                <ConfirmModal openModal onConfirm={inputChangeConfirmed} onCancel={inputChangeNotConfirmed} />
             )}
         </div>
     );
