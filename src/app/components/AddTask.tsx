@@ -7,6 +7,7 @@ import { RootState } from './Redux/types';
 import { Task as TaskType } from './Redux/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { emptyTask } from './Redux/tasks/slice';
 
 const AddTask = () => {
     const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const AddTask = () => {
         e.preventDefault();
         if (!newTask || !newTask.name.trim()) alert('Task cannot be empty');
         else dispatch(addTask(newTask));
-        setNewTask({ name: '', id: 0 });
+        setNewTask(emptyTask);
     };
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setChangedName(e.target.value);
