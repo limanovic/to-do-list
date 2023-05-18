@@ -66,7 +66,15 @@ export default function Test() {
                         , a confirmation modal asks you to confirm. Are you sure? If you choose{' '}
                         <button className="w-20 rounded border border-gray-300">Yes</button>, item is removed from the
                         list; if you you choose <button className="w-20 rounded border border-gray-300">No</button>, the
-                        task remains on task remains on list.
+                        task remains on task remains on list. When there are two or more tasks listed,{' '}
+                        <Button variant="outlined" color="error">
+                            Delete all
+                        </Button>{' '}
+                        appears. A confirmation modal asks you whether you are sure when you click it. All tasks are
+                        removed from the list if you choose{' '}
+                        <button className="w-20 rounded border border-gray-300">Yes</button>; if you choose{' '}
+                        <button className="w-20 rounded border border-gray-300">No</button>, the modal disappears and
+                        the list stays the same.
                     </Typography>
                 </AccordionDetails>
             </Accordion>

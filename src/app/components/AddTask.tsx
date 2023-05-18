@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { emptyTask } from './Redux/tasks/slice';
 import { useAppDispatch, useAppSelector } from './Redux/hooks';
+import axios from 'axios';
 
 const AddTask = () => {
     let tasks = useAppSelector((state) => state.tasks);
@@ -44,6 +45,7 @@ const AddTask = () => {
             setChangedName(task.name);
         }
     }, [task, task?.isEditing]);
+
     return (
         <div>
             {task && task.isEditing ? (
