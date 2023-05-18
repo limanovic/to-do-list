@@ -12,12 +12,12 @@ import { emptyTask } from './Redux/tasks/slice';
 const AddTask = () => {
     const dispatch = useDispatch();
 
-    const inputRef = useRef<HTMLInputElement>(null);
-    const [newTask, setNewTask] = useState<TaskType>();
-    const [changedName, setChangedName] = useState<string>('');
-    const [modalOpened, setModalOpened] = useState<boolean>();
     let tasks = useSelector((state: RootState) => state.tasks);
     const task = tasks.find((task: TaskType) => task.name === task.isEditing);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const [newTask, setNewTask] = useState<TaskType>(emptyTask);
+    const [changedName, setChangedName] = useState<string>('');
+    const [modalOpened, setModalOpened] = useState<boolean>();
 
     const handleAddTask = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -69,7 +69,7 @@ const AddTask = () => {
                         type="text"
                         placeholder="Enter task"
                         ref={inputRef}
-                        value={newTask?.name}
+                        value={newTask.name}
                         onChange={(e) => setNewTask({ name: e.target.value, id: new Date().getTime() })}
                     />
                     <button type="submit" className="p-2 bg-[#1976D2] w-[60px] text-white rounded">
