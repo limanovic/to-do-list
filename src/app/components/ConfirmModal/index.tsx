@@ -2,11 +2,12 @@ import { Modal, Box, Typography } from '@mui/material';
 import React from 'react';
 
 type ModalProps = {
+    modalOpened: boolean;
     onConfirm?: (id?: number) => void;
     onCancel: () => void;
 };
 
-const ConfirmModal: React.FC<ModalProps> = ({ onConfirm, onCancel }) => {
+const ConfirmModal: React.FC<ModalProps> = ({ modalOpened, onConfirm, onCancel }) => {
     const handleConfirm = (id?: number) => {
         if (onConfirm) {
             onConfirm(id);
@@ -14,7 +15,7 @@ const ConfirmModal: React.FC<ModalProps> = ({ onConfirm, onCancel }) => {
     };
     return (
         <Modal
-            open={true}
+            open={modalOpened}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
             className="flex items-center justify-center">

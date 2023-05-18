@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from './Redux/hooks';
 export default function TaskList() {
     const tasks = useAppSelector((state) => state.tasks);
     const dispatch = useAppDispatch();
-    const [modalOpened, setModalOpened] = useState<boolean>();
+    const [modalOpened, setModalOpened] = useState<boolean>(false);
     const openModal = () => {
         setModalOpened(true);
     };
@@ -37,7 +37,7 @@ export default function TaskList() {
                         Delete all
                     </Button>
                 )}
-                {modalOpened && <ConfirmModal onConfirm={deleteAllTasks} onCancel={closeModal} />}
+                <ConfirmModal modalOpened={modalOpened} onConfirm={deleteAllTasks} onCancel={closeModal} />
             </ul>
         </>
     );

@@ -15,7 +15,7 @@ const AddTask = () => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [newTask, setNewTask] = useState<TaskType>(emptyTask);
     const [changedName, setChangedName] = useState<string>('');
-    const [modalOpened, setModalOpened] = useState<boolean>();
+    const [modalOpened, setModalOpened] = useState<boolean>(false);
 
     const handleAddTask = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -75,7 +75,11 @@ const AddTask = () => {
                     </button>
                 </form>
             )}
-            {modalOpened && <ConfirmModal onConfirm={inputChangeConfirmed} onCancel={inputChangeNotConfirmed} />}
+            <ConfirmModal
+                modalOpened={modalOpened}
+                onConfirm={inputChangeConfirmed}
+                onCancel={inputChangeNotConfirmed}
+            />
         </div>
     );
 };
