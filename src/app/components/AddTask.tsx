@@ -30,10 +30,10 @@ const AddTask = () => {
         if (!changedName || !changedName.trim()) alert('Task cannot be empty');
         else setModalOpened(true);
     };
-    const inputChangeNotConfirmed = () => {
+    const cancelChange = () => {
         setModalOpened(false);
     };
-    const inputChangeConfirmed = () => {
+    const saveChange = () => {
         dispatch(saveTask(changedName));
         setChangedName('');
         setModalOpened(false);
@@ -75,11 +75,7 @@ const AddTask = () => {
                     </button>
                 </form>
             )}
-            <ConfirmModal
-                modalOpened={modalOpened}
-                onConfirm={inputChangeConfirmed}
-                onCancel={inputChangeNotConfirmed}
-            />
+            <ConfirmModal modalOpened={modalOpened} onConfirm={saveChange} onCancel={cancelChange} />
         </div>
     );
 };
