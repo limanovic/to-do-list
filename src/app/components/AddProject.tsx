@@ -1,27 +1,26 @@
-'use client';
-import React, { useEffect, useRef, useState } from 'react';
-import ConfirmModal from './ConfirmModal';
-import { addTask, saveTask } from './Redux/tasks/slice';
-import { Task as TaskType } from './Redux/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { emptyTask } from './Redux/tasks/slice';
 import { useAppDispatch, useAppSelector } from './Redux/hooks';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { addProject, saveProject } from './Redux/projects/slice';
+import { useEffect, useRef, useState } from 'react';
+import { Project } from './Redux/types';
+import { emptyProject } from './Redux/projects/slice';
+import ConfirmModal from './ConfirmModal';
 
-const AddTask = () => {
-    let tasks = useAppSelector((state) => state.tasks);
+const AddProject = () => {
     const dispatch = useAppDispatch();
-    const task = tasks.find((task: TaskType) => task.name === task.isEditing);
+    let projects = useAppSelector((state) => state.projects);
+    const [newProject, setNewProject] = useState<Project>(emptyProject);
     const inputRef = useRef<HTMLInputElement>(null);
-    const [newTask, setNewTask] = useState<TaskType>(emptyTask);
     const [changedName, setChangedName] = useState<string>('');
+    const project = projects.find((task: Project) => task.name === task.isEditing);
     const [modalOpened, setModalOpened] = useState<boolean>(false);
 
-    const handleAddTask = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleAddProject = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!newTask || !newTask.name.trim()) alert('Task cannot be empty');
-        else dispatch(addTask(newTask));
-        setNewTask(emptyTask);
+        if (!newProject || !newProject.name.trim()) alert('Task cannot be empty');
+        else dispatch(addProject(newProject));
+        setNewProject(emptyProject);
     };
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setChangedName(e.target.value);
@@ -34,20 +33,20 @@ const AddTask = () => {
         setModalOpened(false);
     };
     const saveChange = () => {
-        dispatch(saveTask(changedName));
+        dispatch(saveProject(changedName));
         setChangedName('');
         setModalOpened(false);
     };
-    useEffect(() => {
-        if (task && task.isEditing && inputRef.current) {
-            inputRef.current.focus();
-            setChangedName(task.name);
-        }
-    }, [task, task?.isEditing]);
 
+    useEffect(() => {
+        if (project && project.isEditing && inputRef.current) {
+            inputRef.current.focus();
+            setChangedName(project.name);
+        }
+    }, [project, project?.isEditing]);
     return (
         <div>
-            {task && task.isEditing ? (
+            {project && project.isEditing ? (
                 <>
                     <input
                         className="border-b-2 solid gray-300 p-1 rounded mr-5 focus:outline-none"
@@ -62,14 +61,14 @@ const AddTask = () => {
                     </button>
                 </>
             ) : (
-                <form onSubmit={(e) => handleAddTask(e)}>
+                <form onSubmit={(e) => handleAddProject(e)}>
                     <input
                         className="border-b-2 solid gray-300 p-1 rounded mr-5 focus:outline-none"
                         type="text"
                         placeholder="Enter task"
                         ref={inputRef}
-                        value={newTask.name}
-                        onChange={(e) => setNewTask({ name: e.target.value, id: new Date().getTime() })}
+                        value={newProject.name}
+                        onChange={(e) => setNewProject({ name: e.target.value, id: new Date().getTime() })}
                     />
                     <button type="submit" className="p-2 bg-[#1976D2] w-[60px] text-white rounded">
                         <FontAwesomeIcon icon={faPlus} />
@@ -80,4 +79,4 @@ const AddTask = () => {
         </div>
     );
 };
-export default AddTask;
+export default AddProject;
