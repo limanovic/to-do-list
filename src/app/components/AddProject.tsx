@@ -51,7 +51,7 @@ const AddProject = () => {
                     <input
                         className="border-b-2 solid gray-300 p-1 rounded mr-5 focus:outline-none"
                         type="text"
-                        placeholder="Enter task"
+                        placeholder="Enter project"
                         ref={inputRef}
                         value={changedName}
                         onChange={handleInputChange}
@@ -65,10 +65,10 @@ const AddProject = () => {
                     <input
                         className="border-b-2 solid gray-300 p-1 rounded mr-5 focus:outline-none"
                         type="text"
-                        placeholder="Enter task"
+                        placeholder="Enter project"
                         ref={inputRef}
                         value={newProject.name}
-                        onChange={(e) => setNewProject({ name: e.target.value, id: new Date().getTime() })}
+                        onChange={(e) => setNewProject({ name: e.target.value, id: new Date().getTime(), tasks: [] })}
                     />
                     <button type="submit" className="p-2 bg-[#1976D2] w-[60px] text-white rounded">
                         <FontAwesomeIcon icon={faPlus} />

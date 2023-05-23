@@ -1,15 +1,17 @@
 'use client';
 import Task from './Task';
-import { deleteTasks } from './Redux/tasks/slice';
 import { Button } from '@mui/material';
 import { useState } from 'react';
 import ConfirmModal from './ConfirmModal';
 import { useAppDispatch, useAppSelector } from './Redux/hooks';
+import { Project } from './Redux/types';
+import { deleteTasks } from './Redux/projects/slice';
 
 export default function TaskList() {
-    const tasks = useAppSelector((state) => state.tasks);
     const dispatch = useAppDispatch();
     const [modalOpened, setModalOpened] = useState<boolean>(false);
+    let projects = useAppSelector((state) => state.projects);
+    const project = projects.find((project: Project) => project.id === project.isActive);
     const openModal = () => {
         setModalOpened(true);
     };
@@ -23,20 +25,24 @@ export default function TaskList() {
     return (
         <>
             <ul className="grid">
-                {tasks?.map((task) => (
-                    <div key={task.id}>
-                        <li key={task.id} className="flex items-center mb-2 justify-center">
-                            <Task task={task} />
-                        </li>
-                        <hr />
-                    </div>
-                ))}
+                {project?.tasks?.map((task) => {
+                    if (task.parentId === project?.isActive) {
+                        return (
+                            <div key={task.id}>
+                                <li key={task.id} className="flex items-center mb-2 justify-center">
+                                    <Task task={task} />
+                                </li>
+                                <hr />
+                            </div>
+                        );
+                    }
+                })}
                 <hr />
-                {tasks.length > 1 && (
+                {project && project.tasks.length > 1 ? (
                     <Button className="h-[40px] mt-2" variant="outlined" color="error" onClick={openModal}>
                         Delete all
                     </Button>
-                )}
+                ) : null}
                 <ConfirmModal modalOpened={modalOpened} onConfirm={deleteAllTasks} onCancel={closeModal} />
             </ul>
         </>

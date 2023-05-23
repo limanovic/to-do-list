@@ -2,10 +2,10 @@ import { Button } from '@mui/material';
 import React, { useState } from 'react';
 import ConfirmModal from './ConfirmModal';
 import { useDispatch } from 'react-redux';
-import { removeTask, editTask } from './Redux/tasks/slice';
 import { Task as TaskType } from './Redux/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faFilePen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { editTask, removeTask } from './Redux/projects/slice';
 
 export default function Task({ task }: { task: TaskType }) {
     const [modalOpened, setModalOpened] = useState<boolean>(false);
