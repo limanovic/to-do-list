@@ -1,46 +1,21 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
-import AddTask from './Input/AddTask';
-import TaskList from './TaskList/TaskList';
-
-type Task = {
-    id: number;
-    name: string;
-};
+import React from 'react';
+import AddTask from './AddTask';
+import TaskList from './TaskList';
+import Test from './Test';
 
 export default function App() {
-    const [tasks, setTasks] = useState<Task[]>([]);
-    const [newTask, setNewTask] = useState('');
-    const [editTask, setEditTask] = useState<Task | null>(null);
-    const [openModal, setOpenModal] = useState<boolean>(false);
-    const inputRef = useRef<HTMLInputElement | null>(null);
-
-    const editTaskName = (task: Task) => {
-        setEditTask(task);
-        setNewTask(task.name);
-        if (inputRef.current) {
-            inputRef.current.focus();
-        }
-    };
-
     return (
-        <div className="p-4">
-            <h1 className="text-2xl font-bold mb-4 text-center">To-Do List</h1>
-            <div className="flex mb-4 justify-center">
-                <AddTask
-                    newTask={newTask}
-                    setNewTask={setNewTask}
-                    tasks={tasks}
-                    setTasks={setTasks}
-                    editTask={editTask}
-                    inputRef={inputRef}
-                    setOpenModal={setOpenModal}
-                    openModal={openModal}
-                    setEditTask={setEditTask}
-                />
+        <div className="flex">
+            <div className="w-3/4 px-20">
+                <h1 className="text-2xl font-bold mb-4 pt-10 text-center">To-Do List</h1>
+                <div className="flex mb-4 justify-center">
+                    <AddTask />
+                </div>
+                <TaskList />
             </div>
-            <TaskList tasks={tasks} editTask={editTask} editTaskName={editTaskName} setTasks={setTasks} />
+            <Test />
         </div>
     );
 }
