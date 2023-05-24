@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Project, Task } from '../types';
 
 export const emptyProject: Project = { name: '', id: 0, tasks: [] };
-export const emptyTask: Task = { name: '', id: 0, parentId: 0 };
+export const emptyTask: Task = { name: '', id: 0 };
 
 const projectSlice = createSlice({
     name: 'projects',
@@ -11,7 +11,7 @@ const projectSlice = createSlice({
         addProject: (state, action: PayloadAction<Project>) => {
             state.push(action.payload);
         },
-        addProjectTasks: (state, action: PayloadAction<Task>) => {
+        addTask: (state, action: PayloadAction<Task>) => {
             const currentProject = state.findIndex((project) => project.id === project.isActive);
             state[currentProject].tasks.push(action.payload);
         },
@@ -60,6 +60,7 @@ const projectSlice = createSlice({
             if (editingProject !== -1) {
                 state[editingProject].isActive = undefined;
             }
+            alert(JSON.stringify(editingProject));
             const project = state.find((project) => project.id === action.payload);
             if (project) {
                 project.isActive = project.id;
@@ -84,7 +85,7 @@ export const {
     saveProject,
     deleteProjects,
     currentProject,
-    addProjectTasks,
+    addTask,
     removeTask,
     editTask,
     saveTask,

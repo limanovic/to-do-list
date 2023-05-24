@@ -1,7 +1,6 @@
 export type Task = {
     id: number;
     name: string;
-    parentId?: number;
     isEditing?: string;
 };
 

@@ -25,18 +25,14 @@ export default function TaskList() {
     return (
         <>
             <ul className="grid">
-                {project?.tasks?.map((task) => {
-                    if (task.parentId === project?.isActive) {
-                        return (
-                            <div key={task.id}>
-                                <li key={task.id} className="flex items-center mb-2 justify-center">
-                                    <Task task={task} />
-                                </li>
-                                <hr />
-                            </div>
-                        );
-                    }
-                })}
+                {project?.tasks?.map((task) => (
+                    <div key={task.id}>
+                        <li key={task.id} className="flex items-center mb-2 justify-center">
+                            <Task task={task} />
+                        </li>
+                        <hr />
+                    </div>
+                ))}
                 <hr />
                 {project && project.tasks.length > 1 ? (
                     <Button className="h-[40px] mt-2" variant="outlined" color="error" onClick={openModal}>
