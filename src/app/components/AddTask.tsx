@@ -4,9 +4,8 @@ import ConfirmModal from './ConfirmModal';
 import { Project, Task as TaskType } from './Redux/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { emptyTask } from './Redux/projects/slice';
 import { useAppDispatch, useAppSelector } from './Redux/hooks';
-import { addTask, saveTask } from './Redux/projects/slice';
+import { addTask, saveTask, emptyTask } from './Redux/projects/slice';
 
 const AddTask = () => {
     const dispatch = useAppDispatch();
