@@ -7,3 +7,11 @@ export type Task = {
 export interface RootState {
     tasks: Task[];
 }
+
+export type Project = {
+    id: number;
+    name: string;
+    tasks: Task[];
+    isActive?: number;
+    isEditing?: string;
+};

@@ -1,27 +1,26 @@
-'use client';
-import React, { useEffect, useRef, useState } from 'react';
-import ConfirmModal from './ConfirmModal';
-import { Project, Task as TaskType } from './Redux/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch, useAppSelector } from './Redux/hooks';
-import { addTask, saveTask, emptyTask } from './Redux/projects/slice';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { addProject, saveProject } from './Redux/projects/slice';
+import { useEffect, useRef, useState } from 'react';
+import { Project } from './Redux/types';
+import { emptyProject } from './Redux/projects/slice';
+import ConfirmModal from './ConfirmModal';
 
-const AddTask = () => {
+const AddProject = () => {
     const dispatch = useAppDispatch();
-    const inputRef = useRef<HTMLInputElement>(null);
-    const [newTask, setNewTask] = useState<TaskType>(emptyTask);
-    const [changedName, setChangedName] = useState<string>('');
-    const [modalOpened, setModalOpened] = useState<boolean>(false);
     let projects = useAppSelector((state) => state.projects);
-    const project = projects.find((project: Project) => project.id === project.isActive);
-    const task = project?.tasks.find((task: TaskType) => task.name === task.isEditing);
+    const [newProject, setNewProject] = useState<Project>(emptyProject);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const [changedName, setChangedName] = useState<string>('');
+    const project = projects.find((task: Project) => task.name === task.isEditing);
+    const [modalOpened, setModalOpened] = useState<boolean>(false);
 
-    const handleAddTask = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleAddProject = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!newTask || !newTask.name.trim()) alert('Task cannot be empty');
-        else dispatch(addTask(newTask));
-        setNewTask(emptyTask);
+        if (!newProject || !newProject.name.trim()) alert('Task cannot be empty');
+        else dispatch(addProject(newProject));
+        setNewProject(emptyProject);
     };
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setChangedName(e.target.value);
@@ -34,24 +33,25 @@ const AddTask = () => {
         setModalOpened(false);
     };
     const saveChange = () => {
-        dispatch(saveTask(changedName));
+        dispatch(saveProject(changedName));
         setChangedName('');
         setModalOpened(false);
     };
+
     useEffect(() => {
-        if (task && task.isEditing && inputRef.current) {
+        if (project && project.isEditing && inputRef.current) {
             inputRef.current.focus();
-            setChangedName(task.name);
+            setChangedName(project.name);
         }
-    }, [task, task?.isEditing]);
+    }, [project, project?.isEditing]);
     return (
         <div>
-            {task && task.isEditing ? (
+            {project && project.isEditing ? (
                 <>
                     <input
                         className="border-b-2 solid gray-300 p-1 rounded mr-5 focus:outline-none"
                         type="text"
-                        placeholder="Enter task"
+                        placeholder="Enter project"
                         ref={inputRef}
                         value={changedName}
                         onChange={handleInputChange}
@@ -61,14 +61,14 @@ const AddTask = () => {
                     </button>
                 </>
             ) : (
-                <form onSubmit={(e) => handleAddTask(e)}>
+                <form onSubmit={(e) => handleAddProject(e)}>
                     <input
                         className="border-b-2 solid gray-300 p-1 rounded mr-5 focus:outline-none"
                         type="text"
-                        placeholder="Enter task"
+                        placeholder="Enter project"
                         ref={inputRef}
-                        value={newTask.name}
-                        onChange={(e) => setNewTask({ name: e.target.value, id: new Date().getTime() })}
+                        value={newProject.name}
+                        onChange={(e) => setNewProject({ name: e.target.value, id: new Date().getTime(), tasks: [] })}
                     />
                     <button type="submit" className="p-2 bg-[#1976D2] w-[60px] text-white rounded">
                         <FontAwesomeIcon icon={faPlus} />
@@ -79,4 +79,4 @@ const AddTask = () => {
         </div>
     );
 };
-export default AddTask;
+export default AddProject;
